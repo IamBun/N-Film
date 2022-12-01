@@ -11,7 +11,7 @@ const Image = (props) => {
 
   return (
     <img
-      loading="lazy"
+      // loading="lazy"
       style={{ overflow: "hidden", transition: "0.3s linear" }}
       src={_fallBack || props.src}
       className={props.className}

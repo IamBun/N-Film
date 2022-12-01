@@ -65,6 +65,16 @@ const NavBar = () => {
               Movies
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/genres"
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : undefined
+              }
+            >
+              Genres
+            </NavLink>
+          </li>
         </ul>
       </div>
 

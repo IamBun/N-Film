@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import TvShows from "./pages/TvShows";
 import Movies from "./pages/Movies";
+import Genres from "./components/Genres/Genres";
+
 import { motion } from "framer-motion";
 
 const API_KEY = "dd6fdb772b28dae8f86ca8a8e9b397a3";
@@ -35,6 +37,11 @@ function App() {
           <Route
             path="/search"
             element={<Search requests={requests} apikey={API_KEY} />}
+          />
+          <Route path="/genres" element={<Genres requests={requests} />} />
+          <Route
+            path="/genres/:genresId"
+            element={<Genres requests={requests} />}
           />
         </Routes>
       </Layout>

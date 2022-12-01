@@ -40,6 +40,8 @@ ul {
 
 button,
 input,
+option,
+select,
 [tabIndex] {
   border: none;
   outline: none;
