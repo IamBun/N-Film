@@ -1,0 +1,33 @@
+.filmCollection {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, calc(90vw / 5));
+  row-gap: 20px;
+  padding: 0 10vw;
+  transition: 0.3s linear;
+}
+
+.filmCollection:hover .filmItem {
+  opacity: 0.5;
+}
+
+.filmItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.filmItem h3 {
+  text-align: center;
+  background-color: rgba(42, 42, 42, 0.207);
+  flex: 1;
+}
+
+.filmCollection .filmItem:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  z-index: 30;
+  transition: linear 0.3s;
+}

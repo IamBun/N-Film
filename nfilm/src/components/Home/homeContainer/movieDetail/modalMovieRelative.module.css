@@ -1,0 +1,60 @@
+.filmRelative h1 {
+  padding: 20px 40px 0 40px;
+}
+
+.relativeWrapper {
+  /* height: 600px; */
+  padding: 20px 40px 40px 40px;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, calc(100% / 3));
+  gap: 5px;
+}
+
+.relativeThumbnail {
+  background-size: cover;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 134px;
+}
+
+.relativeInfor {
+  background-color: #333;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  cursor: pointer;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.relativeInfor .inforDescription {
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inforVote {
+  color: var(--green-color);
+}
+
+.relativeWrapper:hover .relative {
+  opacity: 0.5;
+}
+
+.relativeWrapper .relative:hover {
+  opacity: 1;
+}
+
+.playBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+}

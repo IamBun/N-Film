@@ -1,0 +1,39 @@
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-top: 150px;
+  margin-bottom: 60px;
+}
+
+.searchForm {
+  height: 40px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  border-radius: 8px;
+}
+
+.searchForm input {
+  flex: auto;
+  font-size: 24px;
+  background-color: transparent;
+}
+
+.searchForm svg {
+  color: var(--primary-color);
+}
+
+.logoImg {
+  height: 150%;
+}
+
+.resetSearchBtn {
+  font-size: 20px;
+  cursor: pointer;
+}

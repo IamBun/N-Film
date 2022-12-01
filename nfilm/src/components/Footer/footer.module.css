@@ -1,0 +1,29 @@
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 5px 50px;
+  position: relative;
+  bottom: 0;
+}
+
+.column {
+  display: grid;
+  grid-template-columns: repeat(4, calc((100%-100px) / 4));
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
+.column li {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .column {
+    display: grid;
+    grid-template-columns: repeat(2, calc((100%-100px) / 2));
+  }
+}

@@ -1,0 +1,25 @@
+import { useState } from "react";
+const Image = (props) => {
+  const [_fallBack, setFallBack] = useState("");
+
+  const handerError = () => {
+    if (props.fallback) {
+      setFallBack(props.fallback);
+      props.error(true);
+    }
+  };
+
+  return (
+    <img
+      loading="lazy"
+      style={{ overflow: "hidden", transition: "0.3s linear" }}
+      src={_fallBack || props.src}
+      className={props.className}
+      alt={props.alt}
+      onError={handerError}
+      onClick={props.onClick}
+    />
+  );
+};
+
+export default Image;
