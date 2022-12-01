@@ -7,7 +7,7 @@ import FilmCollection from "../FilmCollection/FilmCollection";
 const Genres = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const [idGenres, setIdGenres] = useState(params.genresId);
+  const [idGenres, setIdGenres] = useState();
   const [genresName, setGenresName] = useState();
   const [filmRender, setFilmRender] = useState();
   const [showInput, setShowInput] = useState(false);
@@ -24,6 +24,7 @@ const Genres = () => {
       const data = await res.json();
       setFilmRender(data);
       console.log(data);
+      console.log(params.genresId);
     } catch (error) {
       console.log(error.message);
     }
@@ -33,43 +34,51 @@ const Genres = () => {
     fetchGenresFilm();
   }, [params.genresId]);
 
-  //click vao thi chuyen trang den genres/idGenres
-  const submitForm = (e) => {
-    e.preventDefault();
-    navigate(`/genres/${idGenres}`);
+  const onChangehandler = (e) => {
+    setGenresName(e.target.value);
   };
-
-  //   window.addEventListener("click", () => {
-  //     setShowInput(false);
-  //   });
 
   const showInputPopup = () => {
     setShowInput(!showInput);
   };
 
+  const filterGenres = () => {
+    navigate(`/genres/${idGenres}`);
+  };
+
   return (
     <div className={classes.genres}>
-      <form onSubmit={submitForm} className={classes.form}>
-        <label className={classes.filterLabel}>Genres </label>
+      <form className={classes.form}>
+        <div className={classes.filterLabel}>
+          <label className={classes.filterLabel}>Genres </label>
+        </div>
         <div onClick={showInputPopup} className={classes.inputPopup}>
           {!showInput && (
-            <label>{genresName ? genresName : "Choose genres ..."}</label>
+            <input
+              defaultValue="Choose genres..."
+              value={genresName}
+              onChange={onChangehandler}
+            />
+            // <label>{genresName ? genresName : "Choose genres ..."}</label>
           )}
-          {showInput &&
-            genres.map((ele, index) => (
-              <label
-                key={index}
-                onClick={() => {
-                  setGenresName(ele.name);
-                  setIdGenres(ele.id);
-                }}
-              >
-                {ele.name}
-              </label>
-            ))}
+          {showInput && (
+            <div className={classes.listGenres}>
+              {genres.map((ele, index) => (
+                <label
+                  key={index}
+                  onClick={() => {
+                    setGenresName(ele.name);
+                    setIdGenres(ele.id);
+                  }}
+                >
+                  {ele.name}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
-        <div className={classes.getFilmBtn} onClick={submitForm}>
-          <label>Get Film</label>
+        <div className={classes.getFilmBtn} onClick={filterGenres}>
+          <label>Filter</label>
         </div>
       </form>
       {filmRender && <FilmCollection filmCollection={filmRender} />}

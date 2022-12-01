@@ -45,14 +45,22 @@
   cursor: pointer;
 }
 
-.inputPopup label {
+.inputPopup input {
   cursor: pointer;
+  background-color: transparent;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
 }
 
-.inputPopup label:first-child {
+.inputPopup label:hover {
+  color: var(--primary-color);
+}
+
+/* .inputPopup label:first-child {
   min-height: 40px;
   padding-top: 10px;
-}
+} */
 
 /* .inputPopup label:first {
   margin-top: 10px;
@@ -75,4 +83,11 @@
 .inputPopup label,
 .getFilmBtn label {
   cursor: pointer;
+}
+
+.listGenres {
+  display: grid;
+  grid-template-columns: repeat(3, calc(40vw / 3));
+  gap: 10px;
+  row-gap: 10px;
 }
