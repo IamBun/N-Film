@@ -5,6 +5,8 @@ import Search from "./pages/Search";
 import TvShows from "./pages/TvShows";
 import Movies from "./pages/Movies";
 import Genres from "./components/Genres/Genres";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 import { motion } from "framer-motion";
 
@@ -43,6 +45,8 @@ function App() {
             path="/genres/:genresId"
             element={<Genres requests={requests} />}
           />
+          <Route path="/login" element={<Login requests={requests} />} />
+          <Route path="/register" element={<Register requests={requests} />} />
         </Routes>
       </Layout>
     </motion.div>
