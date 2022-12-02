@@ -5,10 +5,9 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import useDebounce from "../../hooks/useDebounce";
 import Image from "../UI/Image";
 import FilmCollection from "../FilmCollection/FilmCollection";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const SearchContainer = (props) => {
-  const searchInputRef = useRef();
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const debounce = useDebounce(searchValue, 500);
@@ -38,7 +37,6 @@ const SearchContainer = (props) => {
       }
       const data = await res.json();
       setSearchResults(data);
-      console.log(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -62,7 +60,6 @@ const SearchContainer = (props) => {
           placeholder="Search film here..."
           onChange={valueSearchChangeHandler}
           value={searchValue}
-          //  ref={searchInputRef}
         />
         {isType && (
           <AiFillCloseCircle

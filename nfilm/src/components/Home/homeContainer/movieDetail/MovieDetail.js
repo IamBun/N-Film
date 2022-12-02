@@ -40,7 +40,7 @@ const MovieDetail = (props) => {
       }
 
       const data = await res.json();
-
+      console.log(data.results);
       setVideo(data.results[0]);
     } catch (error) {
       console.log(error.message);
@@ -74,6 +74,10 @@ const MovieDetail = (props) => {
       props.onClick();
     }
   });
+
+  const youtubeError = () => {
+    alert("No video found ! ");
+  };
 
   return (
     <div className={classes.movieDetailWrapper}>
@@ -122,7 +126,11 @@ const MovieDetail = (props) => {
 
           {showVideo && !closeVideo && (
             <div className={classes.videoTrailer}>
-              <YouTube videoId={video.key} opts={opts}></YouTube>
+              <YouTube
+                videoId={video.key}
+                opts={opts}
+                onError={youtubeError}
+              ></YouTube>
 
               <AiFillCloseCircle
                 className={classes.videoCloseBtn}

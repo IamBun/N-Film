@@ -22,6 +22,7 @@ body {
   background-color: var(--black-color);
   user-select: none;
   color: var(--white-color);
+  scroll-behavior: smooth;
 }
 
 code {

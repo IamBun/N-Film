@@ -23,8 +23,6 @@ const Genres = () => {
 
       const data = await res.json();
       setFilmRender(data);
-      console.log(data);
-      console.log(params.genresId);
     } catch (error) {
       console.log(error.message);
     }

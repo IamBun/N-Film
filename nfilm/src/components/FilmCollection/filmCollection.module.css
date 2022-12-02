@@ -31,3 +31,18 @@
   z-index: 30;
   transition: linear 0.3s;
 }
+
+/* .filmCollection img {
+  animation: slideRightToLeft 0.4s linear;
+}
+
+@keyframes slideRightToLeft {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+  to {
+    opacity: 1;
+    left: 100%;
+  }
+} */

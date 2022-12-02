@@ -27,7 +27,6 @@ const Banner = (props) => {
         throw new Error("loading failed !");
       }
       const data = await res.json();
-      console.log(data);
       setMovie(data.results);
       setBanner(
         data.results[Math.floor(Math.random() * data.results.length - 1)]
