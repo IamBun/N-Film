@@ -12,7 +12,7 @@ const Image = (props) => {
   return (
     <img
       // loading="lazy"
-      style={{ overflow: "hidden", transition: "0.3s linear" }}
+      style={{ overflow: "hidden" }}
       src={_fallBack || props.src}
       className={props.className}
       alt={props.alt}
