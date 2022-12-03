@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 const SearchContainer = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const debounce = useDebounce(searchValue, 500);
+  const debounce = useDebounce(searchValue, 500); // dung hooks useDebounce de bat su kien search sau 0,5s
   const [isType, setIsType] = useState(false);
 
   const valueSearchChangeHandler = (e) => {

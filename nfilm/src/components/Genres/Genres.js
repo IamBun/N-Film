@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { API_KEY } from "../const/CONST";
 import FilmCollection from "../FilmCollection/FilmCollection";
 const Genres = () => {
+  //hien thi the loai phim
   const navigate = useNavigate();
   const params = useParams();
   const [idGenres, setIdGenres] = useState();
@@ -13,6 +14,7 @@ const Genres = () => {
   const [showInput, setShowInput] = useState(false);
 
   const fetchGenresFilm = async function () {
+    // get API phim theo the loai
     try {
       const res = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${params.genresId}`
@@ -33,14 +35,17 @@ const Genres = () => {
   }, [params.genresId]);
 
   const onChangehandler = (e) => {
+    //click chon the loai thi luu vao bien input
     setGenresName(e.target.value);
   };
 
   const showInputPopup = () => {
+    //tat mo bang list the loai phim
     setShowInput(!showInput);
   };
 
   const filterGenres = () => {
+    // chuyen trang den /: the loai phim
     navigate(`/genres/${idGenres}`);
   };
 
@@ -51,15 +56,14 @@ const Genres = () => {
           <label className={classes.filterLabel}>Genres </label>
         </div>
         <div onClick={showInputPopup} className={classes.inputPopup}>
-          {!showInput && (
+          {!showInput && ( //luc moi vao chua chon the loai, khong hien thi list de chon
             <input
               defaultValue="Choose genres..."
               value={genresName}
               onChange={onChangehandler}
             />
-            // <label>{genresName ? genresName : "Choose genres ..."}</label>
           )}
-          {showInput && (
+          {showInput && ( //hien thi list genres de chon
             <div className={classes.listGenres}>
               {genres.map((ele, index) => (
                 <label

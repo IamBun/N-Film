@@ -22,13 +22,7 @@ const HomeContainer = (props) => {
       </div>
     </div>
   );
-  {
-    /* <ActionMovies />
-      <ComedyMovies />
-      <HorrorMovies />
-      <RomanceMovies />
-      <Documentaries /> */
-  }
+
 };
 
 export default HomeContainer;

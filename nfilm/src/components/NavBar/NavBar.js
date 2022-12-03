@@ -1,7 +1,7 @@
 import classes from "./navBar.module.css";
 import Image from "../UI/Image";
 import images2 from "../../assets/logo.png";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaSearch,
   FaUserCircle,
@@ -19,7 +19,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const data = useSelector((state) => state.user.userInfor);
+  const data = useSelector((state) => state.user.userInfor); // kiem tra xem co user hay khong
   const changeNavBar = () => {
     if (window.scrollY < 100) {
       //khi keo xuong hon 100px
@@ -34,8 +34,13 @@ const NavBar = () => {
   }, []);
 
   const logOutHandler = () => {
-    dispatch(UserActions.logout());
+    //logout
+    dispatch(UserActions.logout()); //gui dispatch logout trong store
     toast.success("Log out completed !");
+    navigate("/");
+  };
+
+  const goHomePage = () => {
     navigate("/");
   };
 
@@ -50,7 +55,11 @@ const NavBar = () => {
       }
     >
       <div className={classes.navLogo}>
-        <Image src={images2} className={classes.navImg}></Image>
+        <Image
+          src={images2}
+          className={classes.navImg}
+          onClick={goHomePage}
+        ></Image>
         <ul className={classes.navLink}>
           <li>
             <NavLink
@@ -105,7 +114,7 @@ const NavBar = () => {
         >
           <FaSearch></FaSearch>
         </NavLink>
-        {data.idToken && (
+        {data.idToken && ( //co IdToken(da dang nhap) thi hien thi myCollection
           <NavLink
             to="/mycollection"
             className={({ isActive }) =>
@@ -115,7 +124,9 @@ const NavBar = () => {
             <FaHouseUser />
           </NavLink>
         )}
+        {/* hien thi nut logout khi co user */}
         {data.idToken && <FaSignOutAlt onClick={logOutHandler} />}
+        {/* chua dang nhap, hien thi nut login  */}
         {!data.idToken && (
           <NavLink
             to="/login"

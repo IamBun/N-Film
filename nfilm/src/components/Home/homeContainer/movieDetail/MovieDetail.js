@@ -40,7 +40,6 @@ const MovieDetail = (props) => {
       }
 
       const data = await res.json();
-      console.log(data.results);
       setVideo(data.results[0]);
     } catch (error) {
       console.log(error.message);
@@ -50,11 +49,11 @@ const MovieDetail = (props) => {
   useEffect(() => {
     fetchFilmDetail();
     fetchVideo();
-    const relative6 = relative.slice(0, 6);
+    const relative6 = relative.slice(0, 6); // hien thi mot lan 6 phim
     setRelative(relative6);
   }, []);
 
-  const opts = {
+  const opts = { //setup video Youtube
     width: "100%",
     height: "430px",
     playerVars: {
@@ -69,7 +68,7 @@ const MovieDetail = (props) => {
   const closeVideoHandler = () => {
     setCloseVideo(true);
   };
-  window.addEventListener("keydown", (e) => {
+  window.addEventListener("keydown", (e) => { //nhan esc tren ban phim
     if (e.keyCode === 27) {
       props.onClick();
     }

@@ -19,6 +19,7 @@ export const FOOTER_DATA = [
 
 export const API_KEY = "dd6fdb772b28dae8f86ca8a8e9b397a3";
 export const API_KEY_NFLIM_FIREBASE = "AIzaSyCCQdkZFbdsl7GIbTT8psIfp1DJFTXEviU";
+
 export const requests = {
   fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
   fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_network=123`,
@@ -29,6 +30,11 @@ export const requests = {
   fetchRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
   fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
   fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
+
+  fetchTvDrama: `/discover/movie?api_key=${API_KEY}&with_genres=18`,
+  fetchTvFamily: `/discover/movie?api_key=${API_KEY}&with_genres=10751`,
+  fetchTvAnimation: `/discover/movie?api_key=${API_KEY}&with_genres=16`,
+  fetchTvMystery: `/discover/movie?api_key=${API_KEY}&with_genres=9648`,
 };
 
 export const genres = [

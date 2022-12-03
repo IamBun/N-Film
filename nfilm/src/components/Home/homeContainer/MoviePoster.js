@@ -32,17 +32,20 @@ const MoviePoster = (props) => {
 
   useEffect(() => {
     const getMovieShow = () => {
+      //show 6 phim dau tien trong mang
       setMovieShow(MoviePoster.slice(startIndex, endIndex));
     };
     getMovieShow();
   }, [MoviePoster, startIndex, endIndex]);
 
   const rightClick = () => {
+    //click right -> hien thi 6 phim tiep theo
     setStartIndex(startIndex + 6);
     setEndIndex(endIndex + 6);
   };
 
   const leftClick = () => {
+    //click left -> hien thi 6 phim truoc do
     setStartIndex(startIndex - 6);
     setEndIndex(endIndex - 6);
   };
@@ -62,7 +65,7 @@ const MoviePoster = (props) => {
         setIsHover(false);
       }}
     >
-      {startIndex > 5 && (
+      {startIndex > 5 && ( //neu start > 5 thi moi hien thi nut left
         <FaAngleLeft
           className={
             !isHover ? `${classes.leftIcon}` : `${classes.leftIconActive}`
@@ -78,7 +81,6 @@ const MoviePoster = (props) => {
               className={classes.poster_path}
               src={`https://image.tmdb.org/t/p/original${ele.poster_path}`}
               onClick={() => {
-                console.log(ele);
                 setIdFilm(ele.id);
                 setShowModal(true);
                 document.body.style.overflowY = "hidden";
@@ -88,7 +90,7 @@ const MoviePoster = (props) => {
           </div>
         );
       })}
-      {endIndex < MoviePoster.length && (
+      {endIndex < MoviePoster.length && ( // hien thi nut right
         <FaAngleRight
           className={
             !isHover ? `${classes.rightIcon}` : `${classes.rightIconActive}`

@@ -7,10 +7,12 @@ const UserSlice = createSlice({
   reducers: {
     login(state, action) {
       state.userInfor = action.payload;
+      sessionStorage.setItem("currentUser", `${action.payload.email}`);
     },
 
     logout(state) {
       state.userInfor = {};
+      sessionStorage.removeItem("currentUser");
     },
   },
 });

@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <div className={classes.footer}>
-      <a>Questions? Contact us.</a>
+      <h3>Questions? Contact us.</h3>
       {data && (
         <div>
           <ul className={classes.column}>

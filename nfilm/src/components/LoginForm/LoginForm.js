@@ -2,10 +2,10 @@ import Image from "../UI/Image";
 import classes from "./loginForm.module.css";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_KEY_NFLIM_FIREBASE } from "../const/CONST";
 import { UserActions } from "../../store/UserSlice";
@@ -24,6 +24,7 @@ const LoginForm = () => {
     const enterPasswordValue = passwordInputRef.current.value;
 
     fetch(
+      // post thong tin login len CSDL
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY_NFLIM_FIREBASE}`,
       {
         method: "POST",
@@ -41,8 +42,8 @@ const LoginForm = () => {
         return res.json();
       })
       .then((data) => {
+        // Dua vao message tra ve de thong bao loi
         if (data.error) {
-          console.log(data.error.message);
           switch (data.error.message) {
             case "INVALID_EMAIL":
               toast.error("Invalid Email ! Try again !");
@@ -58,11 +59,11 @@ const LoginForm = () => {
               break;
           }
         } else {
-          toast.success("Sign in completed !");
-          dispatch(UserActions.login(data));
+          toast.success("Sign in completed !"); // dang nhap thanh cong
+          dispatch(UserActions.login(data)); // gui dispatch de luu thong tin dang nhap vao store
           navigate("/");
 
-          emailInputRef.current.value = "";
+          emailInputRef.current.value = ""; //reset value
           passwordInputRef.current.value = "";
         }
       })

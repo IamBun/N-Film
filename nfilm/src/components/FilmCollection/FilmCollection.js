@@ -5,30 +5,33 @@ import img from "../../assets/logo.png";
 import MovieDetail from "../Home/homeContainer/movieDetail/MovieDetail";
 
 const FilmCollection = (props) => {
+  //show Film va ten phim
   const [film, setFilm] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [idFilm, setIdFilm] = useState();
+  const [showModal, setShowModal] = useState(false); //show Modal khi click vao
+  const [idFilm, setIdFilm] = useState(); //lay id phim
 
   useEffect(() => {
     setFilm(props.filmCollection.results);
-  });
+  }, [props]);
 
   const closeModal = (e) => {
+    // dong modal
     setShowModal(false);
-    document.body.style.overflowY = "scroll";
+    document.body.style.overflowY = "scroll"; //hien thi lai thanh scroll cua trinh duyet
   };
 
   return (
     <>
       <div className={classes.filmCollection}>
         {film &&
-          film.map((ele) => (
+          film.map((ele, index) => (
             <div
+              key={index}
               className={classes.filmItem}
               onClick={() => {
                 setShowModal(true);
                 setIdFilm(ele.id);
-                document.body.style.overflowY = "hidden";
+                document.body.style.overflowY = "hidden"; //an thanh scroll cua trinh duyet khi show modal
               }}
             >
               <Image

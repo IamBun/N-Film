@@ -1,55 +1,69 @@
+import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import classes from "./app.module.css";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
-import Search from "./pages/Search";
-import TvShows from "./pages/TvShows";
-import Movies from "./pages/Movies";
-import Genres from "./components/Genres/Genres";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
+import { BrowserView, MobileView } from "react-device-detect"; // display device
 
-import { motion } from "framer-motion";
+import { requests } from "./components/const/CONST";
+import { API_KEY } from "./components/const/CONST";
 
-const API_KEY = "dd6fdb772b28dae8f86ca8a8e9b397a3";
-const requests = {
-  fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
-  fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_network=123`,
-  fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
-  fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
-  fetchComedyMovies: `/discover/movie?api_key=${API_KEY}&with_genres=35`,
-  fetchHorrorMovies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
-  fetchRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
-  fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
-  fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
-
-  fetchTvDrama: `/discover/movie?api_key=${API_KEY}&with_genres=18`,
-  fetchTvFamily: `/discover/movie?api_key=${API_KEY}&with_genres=10751`,
-  fetchTvAnimation: `/discover/movie?api_key=${API_KEY}&with_genres=16`,
-  fetchTvMystery: `/discover/movie?api_key=${API_KEY}&with_genres=9648`,
-};
+const Search = React.lazy(() => import("./pages/Search"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Register = React.lazy(() => import("./pages/Register"));
+const MyCollection = React.lazy(() => import("./pages/MyCollection"));
+const Genres = React.lazy(() => import("./components/Genres/Genres"));
+const Movies = React.lazy(() => import("./pages/Movies"));
+const TvShows = React.lazy(() => import("./pages/TvShows"));
 
 function App() {
   return (
-    <motion.div initial="hidden" animate="visible" exit="hidden">
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home requests={requests} />} />
-          <Route path="/tvshows" element={<TvShows requests={requests} />} />
-          <Route path="/movies" element={<Movies requests={requests} />} />
-          <Route
-            path="/search"
-            element={<Search requests={requests} apikey={API_KEY} />}
-          />
-          <Route path="/genres" element={<Genres requests={requests} />} />
-          <Route
-            path="/genres/:genresId"
-            element={<Genres requests={requests} />}
-          />
-          <Route path="/login" element={<Login requests={requests} />} />
-          <Route path="/register" element={<Register requests={requests} />} />
-        </Routes>
-      </Layout>
-    </motion.div>
+    <Layout>
+      <Suspense
+        fallback={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "100px auto",
+            }}
+          >
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <div className={classes.displayMinWidth600}>
+          <Routes>
+            <Route path="/" element={<Home requests={requests} />} />
+            <Route path="/tvshows" element={<TvShows requests={requests} />} />
+            <Route path="/movies" element={<Movies requests={requests} />} />
+            <Route
+              path="/search"
+              element={<Search requests={requests} apikey={API_KEY} />}
+            />
+            <Route path="/genres" element={<Genres requests={requests} />} />
+            <Route
+              path="/genres/:genresId"
+              element={<Genres requests={requests} />}
+            />
+            <Route
+              path="/mycollection"
+              element={<MyCollection requests={requests} />}
+            />
+            <Route path="/login" element={<Login requests={requests} />} />
+            <Route
+              path="/register"
+              element={<Register requests={requests} />}
+            />
+          </Routes>
+        </div>
+        <div className={classes.displayMaxWidth600}>
+          <h3>Mobile version is developing...</h3>
+          <LoadingSpinner></LoadingSpinner>
+        </div>
+      </Suspense>
+    </Layout>
   );
 }
 

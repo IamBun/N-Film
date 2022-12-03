@@ -5,7 +5,6 @@ const Image = (props) => {
   const handerError = () => {
     if (props.fallback) {
       setFallBack(props.fallback);
-      props.error(true);
     }
   };
 

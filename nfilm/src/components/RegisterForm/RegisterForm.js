@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_KEY_NFLIM_FIREBASE } from "../const/CONST";
 
@@ -20,6 +20,7 @@ const RegisterForm = () => {
     const enterPasswordValue = passwordInputRef.current.value;
 
     fetch(
+      //gui thong tin dang ky len server
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY_NFLIM_FIREBASE}`,
       {
         method: "POST",
@@ -37,8 +38,8 @@ const RegisterForm = () => {
         return res.json();
       })
       .then((data) => {
+        //dua vao thong bao de hien thi
         if (data.error) {
-          console.log(data.error.message);
           switch (data.error.message) {
             case "INVALID_EMAIL":
               toast.error("Invalid Email ! Try again !");
@@ -59,16 +60,16 @@ const RegisterForm = () => {
         } else {
           toast.success("Sign up completed !");
 
-          emailInputRef.current.value = "";
+          emailInputRef.current.value = ""; //reset value
           passwordInputRef.current.value = "";
           navigate("/login");
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className={classes.register}>
-      {/* <img src={img}></img> */}
       <form className={classes.form} onSubmit={submitRegisterHandler}>
         <h1>Sign up</h1>
         <label>Enter your email </label>
