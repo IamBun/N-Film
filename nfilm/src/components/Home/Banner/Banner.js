@@ -1,7 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./banner.module.css";
-import Image from "../../UI/Image";
-import images from "../../../assets/backDrop2.jpg";
 import { AiFillInfoCircle } from "react-icons/ai";
 import MovieDetail from "../homeContainer/movieDetail/MovieDetail";
 
