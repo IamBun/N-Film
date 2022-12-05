@@ -71,7 +71,13 @@ function App() {
           </div>
         </BrowserView>
         <MobileView>
-          <div className={classes.displayMaxWidth600}>
+          <div
+            style={{
+              marginTop: "120px",
+              textAlign: "center",
+              marginBottom: "50px",
+            }}
+          >
             <h3>Mobile version is developing...</h3>
             <LoadingSpinner></LoadingSpinner>
           </div>
