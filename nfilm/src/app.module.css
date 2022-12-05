@@ -1,6 +1,9 @@
 @media (max-width: 600px) {
   .displayMinWidth600 {
     display: none;
+    animation: fadeInOut 3s ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
   }
 
   .displayMaxWidth600 {
@@ -16,5 +19,14 @@
 @media (min-width: 600px) {
   .displayMaxWidth600 {
     display: none;
+  }
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

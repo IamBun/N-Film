@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import classes from "./banner.module.css";
 import Image from "../../UI/Image";
 import images from "../../../assets/backDrop2.jpg";
@@ -29,6 +29,11 @@ const Banner = (props) => {
     }
   };
 
+  const showMoreInforHandler = () => {
+    setShowMoreInfor(true);
+    document.body.style.overflowY = "hidden";
+  };
+
   useEffect(() => {
     fetchBanner();
   }, []);
@@ -40,24 +45,16 @@ const Banner = (props) => {
   return (
     <>
       {banner && (
-        <div className={classes.banner}>
-          <Image
-            fallback={images}
-            alt="bannerImg"
-            className={classes.bannerImg}
-            src={`https://image.tmdb.org/t/p/original${banner.backdrop_path}`}
-          />
-
+        <div
+          className={classes.banner}
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${banner?.backdrop_path})`,
+          }}
+        >
           {
             <div className={classes.description}>
               <h1>{banner.original_title || banner.title || banner.name}</h1>
-              <div
-                className={classes.actionBtn}
-                onClick={() => {
-                  setShowMoreInfor(true);
-                  document.body.style.overflowY = "hidden";
-                }}
-              >
+              <div className={classes.actionBtn} onClick={showMoreInforHandler}>
                 <AiFillInfoCircle />
                 <button>More Infor</button>
               </div>
