@@ -139,7 +139,7 @@ const NavBar = () => {
         )}
         <ToastContainer
           position="top-center"
-          autoClose={2000}
+          autoClose={1200}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick={false}

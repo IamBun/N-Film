@@ -1,7 +1,7 @@
 @media (max-width: 600px) {
   .displayMinWidth600 {
     display: none;
-    animation: fadeInOut 3s ease-in-out;
+    animation: fadeInOut 0.3s ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
   }
