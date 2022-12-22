@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import classes from "./app.module.css";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
-import Trending from "./pages/Trending";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import { BrowserView, MobileView } from "react-device-detect"; // display device
 
@@ -17,6 +16,7 @@ const MyCollection = React.lazy(() => import("./pages/MyCollection"));
 const Genres = React.lazy(() => import("./components/Genres/Genres"));
 const Movies = React.lazy(() => import("./pages/Movies"));
 const TvShows = React.lazy(() => import("./pages/TvShows"));
+const Trending = React.lazy(() => import("./pages/Trending"));
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
 
 function App() {
