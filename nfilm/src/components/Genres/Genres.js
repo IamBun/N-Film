@@ -42,7 +42,6 @@ const Genres = () => {
       }
 
       const data = await res.json();
-      console.log(data);
       setFilmRender(data);
       setTotalPage(data.total_pages);
     } catch (error) {

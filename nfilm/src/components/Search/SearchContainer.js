@@ -5,7 +5,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import useDebounce from "../../hooks/useDebounce";
 import Image from "../UI/Image";
 import FilmCollection from "../FilmCollection/FilmCollection";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const SearchContainer = (props) => {
@@ -17,9 +17,16 @@ const SearchContainer = (props) => {
   const params = useParams();
   const navigate = useNavigate();
 
-  if (!params.page) {
-    params.page = 1;
-  }
+  useEffect(() => {
+    // goi lan dau de kiem tra thu xem nguoi dung co nhap params tren link hay khong
+    if (params.keyword) {
+      setSearchValue(params.keyword);
+    }
+    if (!params.page) {
+      params.page = 1;
+    }
+  }, []);
+
   const valueSearchChangeHandler = (e) => {
     setSearchValue(e.target.value);
     setIsType(true);
@@ -38,11 +45,9 @@ const SearchContainer = (props) => {
       const res = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${
           props.apikey
-        }&language=en-US&query=${debounce || params.keyword}&page=${
-          params.page ? params.page : ""
-        }`
+        }&language=en-US&page=${params.page ? params.page : ""}
+        &query=${debounce}`
       );
-
       if (!res.ok) {
         throw new Error("loading failed !");
       }
@@ -64,11 +69,7 @@ const SearchContainer = (props) => {
 
   useEffect(() => {
     fetchSearch();
-
-    return () => {
-      params.page = 1;
-    };
-  }, [debounce, params.page]);
+  }, [debounce, params.page, params.keyword]);
 
   return (
     <div className={classes.searchContainer}>

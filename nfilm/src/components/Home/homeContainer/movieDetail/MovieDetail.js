@@ -40,7 +40,6 @@ const MovieDetail = (props) => {
       }
 
       const data = await res.json();
-      console.log(data);
       // if (!data.result) {
       //   throw new Error("Not found video");
       // }
@@ -55,7 +54,6 @@ const MovieDetail = (props) => {
             ele.type === "Featurette"
           );
         });
-      console.log(trailerVideo);
       setVideo(trailerVideo[0]);
     } catch (error) {
       console.log(error.message);

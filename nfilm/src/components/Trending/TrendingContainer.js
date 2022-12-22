@@ -31,7 +31,6 @@ const Trending = (props) => {
         throw new Error("loading failed !");
       }
       const data = await res.json();
-      console.log(data);
       setMoviePoster(data.results);
       setTotalPage(data.total_pages);
     } catch (error) {
