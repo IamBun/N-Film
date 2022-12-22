@@ -6,13 +6,20 @@ import useDebounce from "../../hooks/useDebounce";
 import Image from "../UI/Image";
 import FilmCollection from "../FilmCollection/FilmCollection";
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SearchContainer = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const debounce = useDebounce(searchValue, 500); // dung hooks useDebounce de bat su kien search sau 0,5s
   const [isType, setIsType] = useState(false);
+  const [totalPage, setTotalPage] = useState();
+  const params = useParams();
+  const navigate = useNavigate();
 
+  if (!params.page) {
+    params.page = 1;
+  }
   const valueSearchChangeHandler = (e) => {
     setSearchValue(e.target.value);
     setIsType(true);
@@ -29,14 +36,22 @@ const SearchContainer = (props) => {
       }
 
       const res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${props.apikey}&language=en-US&page=1&query=${debounce}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${
+          props.apikey
+        }&language=en-US&query=${debounce || params.keyword}&page=${
+          params.page ? params.page : ""
+        }`
       );
 
       if (!res.ok) {
         throw new Error("loading failed !");
       }
       const data = await res.json();
+      console.log(data);
       setSearchResults(data);
+      setTotalPage(data.total_pages);
+
+      params.keyword = debounce;
     } catch (error) {
       console.log(error.message);
     }
@@ -50,7 +65,11 @@ const SearchContainer = (props) => {
 
   useEffect(() => {
     fetchSearch();
-  }, [debounce]);
+
+    return () => {
+      params.page = 1;
+    };
+  }, [debounce, params.page]);
 
   return (
     <div className={classes.searchContainer}>
@@ -71,6 +90,46 @@ const SearchContainer = (props) => {
       </div>
       {searchResults && (
         <FilmCollection filmCollection={searchResults}></FilmCollection>
+      )}
+      {debounce && (
+        <div className={classes.action}>
+          {params.page > 1 && (
+            <button
+              onClick={() => {
+                navigate(
+                  `/search/${params.keyword}/${Number(params.page) - 1}`
+                );
+                window.scrollTo({
+                  top: 0,
+                  behavior: `smooth`,
+                });
+              }}
+            >
+              Prev Page
+            </button>
+          )}
+          {debounce && (
+            <span>
+              Page {params.page} of {totalPage}
+            </span>
+          )}
+
+          {params.page < totalPage && (
+            <button
+              onClick={() => {
+                navigate(
+                  `/search/${params.keyword}/${Number(params.page) + 1}`
+                );
+                window.scrollTo({
+                  top: 0,
+                  behavior: `smooth`,
+                });
+              }}
+            >
+              Next Page
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

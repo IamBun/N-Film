@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import classes from "./app.module.css";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
+import Trending from "./pages/Trending";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import { BrowserView, MobileView } from "react-device-detect"; // display device
 
@@ -43,14 +44,33 @@ function App() {
                 element={<TvShows requests={requests} />}
               />
               <Route path="/movies" element={<Movies requests={requests} />} />
+
               <Route
                 path="/search"
+                element={<Search requests={requests} apikey={API_KEY} />}
+              />
+              <Route
+                path="/search/:keyword"
+                element={<Search requests={requests} apikey={API_KEY} />}
+              />
+              <Route
+                path="/search/:keyword/:page"
                 element={<Search requests={requests} apikey={API_KEY} />}
               />
               <Route path="/genres" element={<Genres requests={requests} />} />
               <Route
                 path="/genres/:genresId"
                 element={<Genres requests={requests} />}
+              />
+
+              <Route
+                path="/trending"
+                element={<Trending requests={requests} />}
+              />
+
+              <Route
+                path="/trending/:page"
+                element={<Trending requests={requests} />}
               />
               <Route
                 path="/mycollection"

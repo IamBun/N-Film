@@ -37,3 +37,19 @@
   font-size: 20px;
   cursor: pointer;
 }
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.action button {
+  width: 100px;
+  height: 30px;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  cursor: pointer;
+  border-radius: 4px;
+}

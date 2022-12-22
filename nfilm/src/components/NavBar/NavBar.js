@@ -94,6 +94,16 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink
+              to="/trending"
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : undefined
+              }
+            >
+              Trending
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/genres"
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : undefined
