@@ -93,6 +93,23 @@
   row-gap: 10px;
 }
 
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.action button {
+  width: 100px;
+  height: 30px;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .listGenres {
     display: grid;

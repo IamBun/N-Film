@@ -47,7 +47,6 @@ const SearchContainer = (props) => {
         throw new Error("loading failed !");
       }
       const data = await res.json();
-      console.log(data);
       setSearchResults(data);
       setTotalPage(data.total_pages);
 

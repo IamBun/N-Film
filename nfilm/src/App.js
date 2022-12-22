@@ -62,6 +62,10 @@ function App() {
                 path="/genres/:genresId"
                 element={<Genres requests={requests} />}
               />
+              <Route
+                path="/genres/:genresId/:page"
+                element={<Genres requests={requests} />}
+              />
 
               <Route
                 path="/trending"

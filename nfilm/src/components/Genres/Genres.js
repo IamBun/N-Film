@@ -1,9 +1,11 @@
 import classes from "./genres.module.css";
 import { genres } from "../const/CONST";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { API_KEY } from "../const/CONST";
 import FilmCollection from "../FilmCollection/FilmCollection";
+import { genres as genresArr } from "../const/CONST";
+
 const Genres = () => {
   //hien thi the loai phim
   const navigate = useNavigate();
@@ -12,19 +14,37 @@ const Genres = () => {
   const [genresName, setGenresName] = useState();
   const [filmRender, setFilmRender] = useState();
   const [showInput, setShowInput] = useState(false);
+  const [totalPage, setTotalPage] = useState();
+  if (!params.page) {
+    params.page = 1;
+  }
+
+  useMemo(() => {
+    if (params.genresId) {
+      for (let key in genresArr) {
+        if (genresArr[key].id === Number(params.genresId)) {
+          setGenresName(genresArr[key].name);
+        }
+      }
+    }
+  }, []);
 
   const fetchGenresFilm = async function () {
     // get API phim theo the loai
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${params.genresId}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${
+          params.genresId
+        }&page=${params.page ? params.page : ""}`
       );
       if (!res.ok) {
         throw new Error("Loading failed !");
       }
 
       const data = await res.json();
+      console.log(data);
       setFilmRender(data);
+      setTotalPage(data.total_pages);
     } catch (error) {
       console.log(error.message);
     }
@@ -32,7 +52,11 @@ const Genres = () => {
 
   useEffect(() => {
     fetchGenresFilm();
-  }, [params.genresId]);
+
+    return () => {
+      params.page = 1;
+    };
+  }, [params.genresId, params.page]);
 
   const onChangehandler = (e) => {
     //click chon the loai thi luu vao bien input
@@ -84,6 +108,48 @@ const Genres = () => {
         </div>
       </form>
       {filmRender && <FilmCollection filmCollection={filmRender} />}
+      {/* action dieu huowng chuyen trang next, prev  */}
+      {params.page && (
+        <div className={classes.action}>
+          {params.page > 1 && (
+            <button
+              onClick={() => {
+                navigate(
+                  `/genres/${params.genresId}/${Number(params.page) - 1}`
+                );
+                window.scrollTo({
+                  top: 0,
+                  behavior: `smooth`,
+                });
+              }}
+            >
+              Prev Page
+            </button>
+          )}
+
+          {params.page >= 1 && params.page <= { totalPage } && (
+            <span>
+              Page {params.page} of {totalPage}
+            </span>
+          )}
+
+          {params.page < totalPage && (
+            <button
+              onClick={() => {
+                navigate(
+                  `/genres/${params.genresId}/${Number(params.page) + 1}`
+                );
+                window.scrollTo({
+                  top: 0,
+                  behavior: `smooth`,
+                });
+              }}
+            >
+              Next Page
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

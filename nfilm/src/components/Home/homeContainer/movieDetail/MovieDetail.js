@@ -40,7 +40,23 @@ const MovieDetail = (props) => {
       }
 
       const data = await res.json();
-      setVideo(data.results[0]);
+      console.log(data);
+      // if (!data.result) {
+      //   throw new Error("Not found video");
+      // }
+      const trailerVideo = data.results
+        .filter((ele) => {
+          return ele.site === "YouTube";
+        })
+        .filter((ele) => {
+          return (
+            ele.type === "Teaser" ||
+            ele.type === "Trailer" ||
+            ele.type === "Featurette"
+          );
+        });
+      console.log(trailerVideo);
+      setVideo(trailerVideo[0]);
     } catch (error) {
       console.log(error.message);
     }
@@ -53,7 +69,8 @@ const MovieDetail = (props) => {
     setRelative(relative6);
   }, []);
 
-  const opts = { //setup video Youtube
+  const opts = {
+    //setup video Youtube
     width: "100%",
     height: "430px",
     playerVars: {
@@ -68,14 +85,15 @@ const MovieDetail = (props) => {
   const closeVideoHandler = () => {
     setCloseVideo(true);
   };
-  window.addEventListener("keydown", (e) => { //nhan esc tren ban phim
+  window.addEventListener("keydown", (e) => {
+    //nhan esc tren ban phim
     if (e.keyCode === 27) {
       props.onClick();
     }
   });
 
   const youtubeError = () => {
-    alert("No video found ! ");
+    alert("Not found video ! ");
   };
 
   return (
@@ -126,7 +144,7 @@ const MovieDetail = (props) => {
           {showVideo && !closeVideo && (
             <div className={classes.videoTrailer}>
               <YouTube
-                videoId={video.key}
+                videoId={video?.key}
                 opts={opts}
                 onError={youtubeError}
               ></YouTube>
@@ -137,7 +155,12 @@ const MovieDetail = (props) => {
               />
             </div>
           )}
-
+          {/* Neu khong co video 
+          {video.length === 0 && showVideo && !closeVideo && (
+            <div className={classes.noVideoTrailer}>
+              <h1>Not found video !</h1>
+            </div>
+          )} */}
           {/* Info va phim lien quan o phia duoi  */}
           <div className={classes.modalInforRelative}>
             <ModalInfor film={film} />
