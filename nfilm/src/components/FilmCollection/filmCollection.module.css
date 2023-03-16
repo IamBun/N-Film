@@ -46,3 +46,20 @@
     left: 100%;
   }
 } */
+
+@media (max-width: 500px) {
+  .filmCollection {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, calc(90vw / 2));
+    row-gap: 20px;
+    padding: 0 10vw;
+    transition: 0.3s linear;
+  }
+
+  .filmCollection img {
+    max-width: 250px;
+    width: 90%;
+    object-fit: cover;
+  }
+}

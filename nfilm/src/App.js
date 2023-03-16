@@ -105,9 +105,11 @@ function App() {
             <h3>Mobile version is developing...</h3>
             <LoadingSpinner></LoadingSpinner>
           </div> */}
-          {/* <Routes>
+          <Routes>
             <Route path="/" element={<Home requests={requests} />} />
+            <Route path="/tvshows" element={<TvShows requests={requests} />} />
             <Route path="/movies" element={<Movies requests={requests} />} />
+
             <Route
               path="/search"
               element={<Search requests={requests} apikey={API_KEY} />}
@@ -116,6 +118,33 @@ function App() {
               path="/search/:keyword"
               element={<Search requests={requests} apikey={API_KEY} />}
             />
+            <Route
+              path="/search/:keyword/:page"
+              element={<Search requests={requests} apikey={API_KEY} />}
+            />
+            <Route path="/genres" element={<Genres requests={requests} />} />
+            <Route
+              path="/genres/:genresId"
+              element={<Genres requests={requests} />}
+            />
+            <Route
+              path="/genres/:genresId/:page"
+              element={<Genres requests={requests} />}
+            />
+
+            <Route
+              path="/trending"
+              element={<Trending requests={requests} />}
+            />
+
+            <Route
+              path="/trending/:page"
+              element={<Trending requests={requests} />}
+            />
+            <Route
+              path="/mycollection"
+              element={<MyCollection requests={requests} />}
+            />
             <Route path="/login" element={<Login requests={requests} />} />
             <Route
               path="/register"
@@ -123,7 +152,7 @@ function App() {
             />
 
             <Route path="*" element={<PageNotFound requests={requests} />} />
-          </Routes> */}
+          </Routes>
         </MobileView>
       </Suspense>
     </Layout>
