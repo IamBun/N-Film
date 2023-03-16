@@ -28,7 +28,7 @@ function App() {
             style={{
               display: "flex",
               justifyContent: "center",
-              margin: "100px auto",
+              // margin: "100px auto",
             }}
           >
             <LoadingSpinner />
@@ -89,13 +89,13 @@ function App() {
               <Route path="*" element={<PageNotFound requests={requests} />} />
             </Routes>
           </div>
-          <div className={classes.displayMaxWidth600}>
+          {/* <div className={classes.displayMaxWidth600}>
             <h3>Mobile version is developing...</h3>
             <LoadingSpinner></LoadingSpinner>
-          </div>
+          </div> */}
         </BrowserView>
         <MobileView>
-          <div
+          {/* <div
             style={{
               marginTop: "120px",
               textAlign: "center",
@@ -104,7 +104,26 @@ function App() {
           >
             <h3>Mobile version is developing...</h3>
             <LoadingSpinner></LoadingSpinner>
-          </div>
+          </div> */}
+          {/* <Routes>
+            <Route path="/" element={<Home requests={requests} />} />
+            <Route path="/movies" element={<Movies requests={requests} />} />
+            <Route
+              path="/search"
+              element={<Search requests={requests} apikey={API_KEY} />}
+            />
+            <Route
+              path="/search/:keyword"
+              element={<Search requests={requests} apikey={API_KEY} />}
+            />
+            <Route path="/login" element={<Login requests={requests} />} />
+            <Route
+              path="/register"
+              element={<Register requests={requests} />}
+            />
+
+            <Route path="*" element={<PageNotFound requests={requests} />} />
+          </Routes> */}
         </MobileView>
       </Suspense>
     </Layout>

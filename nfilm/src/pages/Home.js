@@ -4,10 +4,10 @@ import HomeContainer from "../components/Home/homeContainer/HomeContainer";
 
 const Home = (props) => {
   return (
-    <div>
+    <>
       <Banner requests={props.requests}></Banner>
       <HomeContainer requests={props.requests}></HomeContainer>
-    </div>
+    </>
   );
 };
 

@@ -172,3 +172,14 @@
     height: 50%;
   }
 }
+
+/* @media (max-width: 500px) {
+  .modalInforRelative .filmRelative {
+    display: none;
+  }
+
+  .modalBackdrop,
+  .modalBackdropBot {
+    height: 50%;
+  }
+} */

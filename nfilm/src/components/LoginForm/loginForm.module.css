@@ -67,3 +67,12 @@
     transform: translate(-50%);
   }
 }
+
+@media (max-width: 500px) {
+  .login {
+    width: 80vw;
+  }
+  .login .form {
+    width: 100%;
+  }
+}

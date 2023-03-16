@@ -13,13 +13,13 @@ const Footer = () => {
     <div className={classes.footer}>
       <h3>Questions? Contact us.</h3>
       {data && (
-        <div>
+        <>
           <ul className={classes.column}>
             {data.map((ele, index) => {
               return <li key={index}>{ele}</li>;
             })}
           </ul>
-        </div>
+        </>
       )}
     </div>
   );

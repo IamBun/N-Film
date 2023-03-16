@@ -58,3 +58,10 @@
   transform: translate(-50%, -50%);
   font-size: 36px;
 }
+
+@media (max-width: 500px) {
+  .filmRelative {
+    margin-bottom: 20px;
+    height: 90vh;
+  }
+}

@@ -72,3 +72,43 @@
     display: none;
   }
 }
+
+.mobi {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .mobi {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    z-index: 99;
+  }
+
+  .mobi svg {
+    font-size: 30px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 24px;
+    position: fixed;
+    z-index: 999;
+    right: 20px;
+    top: calc(0vw + 80px);
+    color: #fff;
+  }
+
+  .list li,
+  .list a {
+    color: #fff;
+  }
+
+  .list a.active {
+    font-size: 24px;
+  }
+}

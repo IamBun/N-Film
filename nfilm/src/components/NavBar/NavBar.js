@@ -8,6 +8,7 @@ import {
   FaHouseUser,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { UserActions } from "../../store/UserSlice";
@@ -18,6 +19,8 @@ const NavBar = () => {
   const [navBarActive, setNavBarActive] = useState(false); //state luu navbar active khi scroll
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [showMobiMenu, setShowMobiMenu] = useState(false);
 
   const data = useSelector((state) => state.user.userInfor); // kiem tra xem co user hay khong
   const changeNavBar = () => {
@@ -45,6 +48,10 @@ const NavBar = () => {
   };
 
   window.addEventListener("scroll", changeNavBar); //bat su kien scroll Y
+
+  const showMobi = () => {
+    setShowMobiMenu(!showMobiMenu);
+  };
 
   return (
     <div
@@ -160,6 +167,59 @@ const NavBar = () => {
           theme="light"
         />
       </div>
+
+      {/* MOBI version */}
+      <div className={classes.mobi}>
+        <GiHamburgerMenu onClick={showMobi}></GiHamburgerMenu>
+      </div>
+      {showMobiMenu && (
+        <ul className={classes.list}>
+          <li>
+            <NavLink
+              to="/movies"
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : undefined
+              }
+              onClick={() => {
+                setShowMobiMenu(false);
+              }}
+            >
+              Movies
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/search"
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : undefined
+              }
+              onClick={() => {
+                setShowMobiMenu(false);
+              }}
+            >
+              <FaSearch> </FaSearch> Search
+            </NavLink>
+          </li>
+          {/* hien thi nut logout khi co user */}
+          {data.idToken && <FaSignOutAlt onClick={logOutHandler} />}
+          {/* chua dang nhap, hien thi nut login  */}
+          <li>
+            {!data.idToken && (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? `${classes.active}` : undefined
+                }
+                onClick={() => {
+                  setShowMobiMenu(false);
+                }}
+              >
+                <FaUserCircle> </FaUserCircle> Login
+              </NavLink>
+            )}
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
